@@ -18,21 +18,22 @@ Visit `gosocrative.com` and enter room name `FIN2026`
 # 
 # remotes::install_github("RforMassSpectrometry/SpectraVis")
 
-library(rpx)
-library(msdata)
-library(rpx)
-library(Spectra)
-library(tidyverse)
-library(cleaver)
-library(MSnbase)
-library(SpectraVis)
-library(tidyverse)
-library(mzR)
-library(PSMatch)
+# library(rpx)
+# library(msdata)
+# library(rpx)
+# library(Spectra)
+# library(tidyverse)
+# library(cleaver)
+# library(MSnbase)
+# library(SpectraVis)
+# library(mzR)
+# library(PSMatch)
 ```
 
 # Toy spectra
 ```{r}
+library(S4Vectors)
+library(Spectra)
 ## Let’s create a DataFrame containing MS levels, retention time, m/z and intensities for 2 spectra
 
 ## data.frame
@@ -66,6 +67,7 @@ sp[c(1 ,2, 1, 1)]
 ## Create this table from f
 
 ```{r}
+library(rpx)
 f <- pxget(PXDataset("PXD000001"), 
            "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzML")
 (sp <- Spectra(f)) # It retrieves from Hard not memory when it is not manually created spectra (MsBackendMzR), so it takes a little bit of time to retrieve.
@@ -240,7 +242,7 @@ sp[2807]
 ```
 ## ggplot visualization
 ```{r}
-#library(tidyverse)
+library(tidyverse)
 
 spectraData(sp) |>
     as_tibble() |>
@@ -327,10 +329,10 @@ plotSpectraOverlay(sp2[i], col = c("red", "steelblue"))
 ```
 
 ## Interactive visulization
-```{r}
+```{r, eval=FALSE}
 ## BiocManager::install("RforMassSpectrometry/SpectraVis")
 
-#library(SpectraVis)
+library(SpectraVis)
 
 plotlySpectra(sp2[31])
 
@@ -354,7 +356,7 @@ Spectra(DataFrame(hd))
 ```
 
 ![](fig/frag.png)
-```{r}
+```{r, eval=FALSE}
 calculateFragments("THSQEEMQHMQR")
 ```
 
